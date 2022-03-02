@@ -1,0 +1,285 @@
+.App {
+  text-align: center;
+}
+
+.app{
+  display: block;
+  margin: 0 auto;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.leaflet-container {
+    height: 600px;
+    display: block;
+    margin: 0 auto;
+    background: #f8f8f8 !important;
+    border-radius: 20px !important;
+    z-index: 1;
+}
+
+.filters, .results-table{
+    min-height: 250px;
+    background: #f8f8f8;
+    border-radius: 20px;
+    margin: 25px 0px;
+    padding: 25px;
+    margin-top: 0px;
+}
+
+.empty-table{
+    background: #f8f8f8;
+    border-radius: 20px;
+    margin: 25px 0px;
+    padding: 25px;
+    text-align: center;
+    margin-top: 0px;
+}
+
+.filters *{
+    font: 18px 'Lucida Console', Monaco, monospace !important;
+}
+
+.filters{
+  height: 600px;
+}
+
+.leaflet-bar a{
+	border-bottom: none !important;
+	background: none !important;
+	color: blue !important;
+}
+
+.leaflet-touch .leaflet-bar {
+    border: 2px solid blue !important;
+}
+
+.leaflet-control-zoom a:hover{
+	background: blue !Important;
+	color: white !important;
+}
+
+.leaflet-top{
+	top: 50% !important;
+	margin-top: 0px !important;
+}
+
+.leaflet-control{
+	margin-top: 0px !important;
+}
+
+.leaflet-control-attribution{
+	display: none !Important;
+}
+
+#sql-editor{
+    display: none !important;
+    max-width: 95%;
+    min-width: 95%;
+    height: 150px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 20px;
+    border: none;
+    padding: 20px;
+}
+
+.filter-button{
+    margin: 0 auto;
+    display: block;
+}
+
+.spinner-border{
+  margin: 0 auto;
+}
+
+.right-side{
+  width: 60%;
+  padding-left: 25px;
+}
+
+.left-side{
+  width: 40%;
+}
+
+.results-table{
+  background: none !important;
+  padding: 0 !important;
+}
+
+.bottom-side{
+  padding: 25px;
+  padding-top: 0px;
+}
+
+.top-side{
+  display: flex;
+  padding: 25px;
+  padding-bottom: 0px;
+  height: 650px;
+}
+
+.pagination-nav{
+  position: fixed;
+  bottom: 25px;
+  right: 50px;
+}
+
+.limit-filter input{
+  width: 100%;
+}
+
+.limit-filter{
+  display: flex;
+  padding: 25px;
+}
+
+.limit-filter span{
+  padding-right: 10px;
+}
+
+.btn-light{
+  z-index: 5;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none !important;
+  border: 2px solid blue !important;
+}
+
+.btn-light span{
+  color: blue;
+}
+
+.toggledOff{
+  display: none !important;
+}
+
+.toggledFull{
+    width: 100% !important;
+    padding-left: 0px;
+    height: 92vh;
+}
+
+.toggledFull .leaflet-container {
+    height: 92vh;
+    display: block;
+    margin: 0 auto;
+    background: #f8f8f8 !important;
+    border-radius: 20px !important;
+    z-index: 1;
+}
+
+
+.first-gis {
+    stroke: blue !important;
+    stroke-width: 1px !important;
+    fill: rgba(0,0,255,0.3) !important;
+}
+
+.second-gis {
+    stroke: red !important;
+    stroke-width: 1px !important;
+    fill: none !important;
+    fill: rgba(255,0,0,0.3) !important;
+}
+
+.third-gis {
+    stroke: green !important;
+    stroke-width: 1px !important;
+    fill: none !important;
+    fill: rgba(0,255,0,0.4) !important;
+}
+
+
+.filters-row{
+  padding: 25px;
+  padding-bottom: 0px;
+}
+
+.ftypes-filter{
+  display: flex;
+}
+
+.ftypes-filter div{
+  padding-right: 25px;
+}
+
+.ftypes-filter input{
+  margin-right: 5px;
+}
+
+td{
+  max-width: 200px;
+  overflow: scroll;
+}
+
+.leaflet-tile {
+    opacity: 1 !important;
+}
+
+tr:hover{
+  cursor: crosshair;
+}
+
+.street-filter .MuiFormControl-root{
+  width: 100% !important;
+}
+
+.selected-indicator{
+  stroke: red !important;
+  fill: red !important;
+  stroke-width: 5px !important;
+}
+
+.header-row{
+  text-align: center;
+}
+
+.buffer-row{
+  display: flex;
+}
+
+.buffer-filter {
+    padding-right: 25px;
+}
+
+.buffer-filter-search{
+}
+
+.search-buttons-group{
+  display: flex;
+}
