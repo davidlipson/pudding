@@ -50,7 +50,4 @@ A beta of the tool has already been presented, and based on the feedback from th
   3. Rewrite most of the UI code in a more componentized way to allow for more dynamic filtering/buffer creation (map and table shouldn't change much).
 
 ## Version X
-
-- all sites that are x dimensions on corners 
-- proximities to infrustructure (subways, buses)
-- e.g. 30 ft wide corner lots wihin 1km of a bus station
+In a future version, the tool could theoreticallly automate the entire process of design and report/pro forma generation. When a filter is generated, a user could selected a property, hit "Generate" and produce a PDF report (as well as additional assets such as Rhino/Grasshopper files, spreadsheets, filtered properties table file, etc) for presenting to potential developers. Properties that have generated reports attached to them, or properties that have been marked as "Favourites" can be stored so that in future queries, these properties are colour tagged in the Map Viewer, and may have additional information attached to them.
