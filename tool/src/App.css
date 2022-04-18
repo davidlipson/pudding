@@ -5,6 +5,7 @@
 .app{
   display: block;
   margin: 0 auto;
+  padding: 30px;
 }
 
 .App-logo {
@@ -47,34 +48,34 @@
     display: block;
     margin: 0 auto;
     background: #f8f8f8 !important;
-    border-radius: 20px !important;
+    border-radius: 10px !important;
     z-index: 1;
 }
 
-.filters, .results-table{
+.filters, .results-table, .buffers{
     min-height: 250px;
     background: #f8f8f8;
-    border-radius: 20px;
-    margin: 25px 0px;
-    padding: 25px;
+    border-radius: 10px;
+    margin: 10px 0px;
+    padding: 10px;
     margin-top: 0px;
 }
 
 .empty-table{
     background: #f8f8f8;
-    border-radius: 20px;
-    margin: 25px 0px;
-    padding: 25px;
+    border-radius: 10px;
+    margin: 10px 0px;
+    padding: 10px;
     text-align: center;
     margin-top: 0px;
 }
 
 .filters *{
-    font: 18px 'Lucida Console', Monaco, monospace !important;
+    font: 14px 'Lucida Console', Monaco, monospace !important;
 }
 
-.filters{
-  height: 600px;
+.buffers *{
+  font: 14px 'Lucida Console', Monaco, monospace !important;
 }
 
 .leaflet-bar a{
@@ -118,8 +119,7 @@
 }
 
 .filter-button{
-    margin: 0 auto;
-    display: block;
+  margin: 10px;
 }
 
 .spinner-border{
@@ -127,34 +127,43 @@
 }
 
 .right-side{
-  width: 60%;
-  padding-left: 25px;
+  width: 100%;
 }
 
 .left-side{
-  width: 40%;
+  width: 100%;
+  display: flex;
+  padding-top: 10px;
 }
 
-.results-table{
+table{
   background: none !important;
   padding: 0 !important;
+  table-layout: fixed;
+}
+
+td{
+  overflow: scroll;
+}
+
+th{
+  overflow: scroll;
 }
 
 .bottom-side{
-  padding: 25px;
+  padding: 10px;
   padding-top: 0px;
 }
 
 .top-side{
-  display: flex;
-  padding: 25px;
+  display: block;
+  padding: 10px;
   padding-bottom: 0px;
-  height: 650px;
 }
 
 .pagination-nav{
   position: fixed;
-  bottom: 25px;
+  bottom: 10px;
   right: 50px;
 }
 
@@ -163,8 +172,7 @@
 }
 
 .limit-filter{
-  display: flex;
-  padding: 25px;
+  padding: 10px;
 }
 
 .limit-filter span{
@@ -214,7 +222,7 @@
     stroke: red !important;
     stroke-width: 1px !important;
     fill: none !important;
-    fill: rgba(255,0,0,0.3) !important;
+    fill: none !important;
 }
 
 .third-gis {
@@ -225,9 +233,18 @@
 }
 
 
-.filters-row{
-  padding: 25px;
-  padding-bottom: 0px;
+.filters-row, .buffer-row{
+  padding: 10px;
+  padding-bottom: 10px;
+  display: flex;
+}
+
+.filters-row label, .Mui-error, .buffer-filter label{
+  font-size: 10px !important;
+}
+
+.buffer-row label{
+  font-size: 10px !important;
 }
 
 .ftypes-filter{
@@ -235,7 +252,7 @@
 }
 
 .ftypes-filter div{
-  padding-right: 25px;
+  padding-right: 10px;
 }
 
 .ftypes-filter input{
@@ -247,12 +264,23 @@ td{
   overflow: scroll;
 }
 
+.add-marker{
+  z-index: 1000 !important;
+  position: fixed;
+  right: 31px;
+  top: 75px;
+}
+
 .leaflet-tile {
     opacity: 1 !important;
 }
 
 tr:hover{
   cursor: crosshair;
+}
+
+.map-view{
+  cursor: crosshair !important;
 }
 
 .street-filter .MuiFormControl-root{
@@ -269,17 +297,247 @@ tr:hover{
   text-align: center;
 }
 
-.buffer-row{
-  display: flex;
+.buffers{
+  width: 40%;
+  margin-right: 10px;
+  overflow: hidden;
 }
+
+.filter-group{
+  border-radius: 10px;
+  border-left: 1px solid rgb(221, 221, 221);  
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.condition-group{
+  position: relative;
+  top: 7px;
+  left: 11px;
+  background: #f8f8f8;
+  padding: 0px 10px;
+}
+
+.remove-filter-row{
+  border: none;
+  background: none;
+  color: red;
+  padding-right: 15px;
+  padding-top: 14px;
+}
+
+.remove-filter-row:hover{
+  text-decoration: underline;
+}
+
+.add-condition{
+  margin: 0 auto;
+  display: flex;
+  margin-top: 10px;;
+}
+
+.condition-tf{
+  margin-top: 10px !important;
+}
+
+.add-condition button{
+  margin: 0 auto;
+  display: block;
+}
+
+.filters{
+  width: 60%;
+  overflow: scroll;
+}
+
+.buffer-gis-0{
+  stroke: rgb(209, 254, 110) !important;
+  fill: rgb(209, 254, 110);
+  fill: none !important;
+}
+
+.buffer-gis-1{
+  stroke: rgb(223, 110, 254) !important;
+  fill: rgb(223, 110, 254);
+  fill: none !important;
+}
+
+.buffer-gis-2{
+  stroke: rgb(110, 254, 242) !important;
+  fill: rgb(110, 254, 242);
+  fill: none !important;
+}
+
+.buffer-gis-3{
+  stroke: rgb(254, 110, 110) !important;
+  fill: rgb(254, 110, 110);
+  fill: none !important;
+}
+
+.buffer-gis-4{
+  stroke: rgb(255, 255, 255) !important;
+  fill: rgb(255, 255, 255);
+  fill: none !important;
+}
+
+.address-bar{
+  position: fixed;
+  z-index: 100;
+  background: white;
+}
+
+.address-search{
+  width: 300px;
+  margin-right: 10px !important;
+}
+
+.address-search label{
+  top: -3px;
+  font-size: 14px;
+}
+
+.address-bar button{
+  height: 44px;
+}
+
 
 .buffer-filter {
-    padding-right: 25px;
-}
-
-.buffer-filter-search{
+    padding-right: 10px;
 }
 
 .search-buttons-group{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.full-query{
+  position: fixed;
+    bottom: 0px;
+    left: 0;
+    background: #cadcff;
+    width: 100%;
+    padding: 20px;
+}
+
+.add-buffer{
+}
+
+.section-title{
+  font-weight: 600 !important;
+  font-style: italic !important;
+  padding: 5px;
+  text-align: center;
+  color: blue;
+}
+
+.section-subline{
+  text-align: center;
+  font-size: 10px !important;
+  font-style: italic !important;
+  font-weight: 600 !important;
+}
+
+.buffer-buttons{
+  display: block;
+  margin-top: 5px !important;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.buffer-buttons button{
+  margin: 5px;
+}
+
+.filter-buffer-span{
+  font-weight: 600;
+  font-style: italic;
+}
+
+
+
+.filter-buffer-field-span{
+  margin-left: 0px !important;
+}
+
+.filter-buffer-divider{
+  border-bottom: 1px solid #80808073;
+  width: 80%;
+  margin: 10px auto;
+}
+
+.MuiOutlinedInput-root {
+  height: 45px;
+}
+
+.MuiOutlinedInput-root div{
+  min-height: inherit !important;
+}
+
+.buffer-body{
+  margin-top: 10px;;
+}
+
+.buffer-fields-group{
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.buff-filter-a .MuiOutlinedInput-root{
+  max-width: 300px !important;
+  overflow: hidden !important;
+}
+
+.autocomplete-tf .MuiOutlinedInput-root{
+  height: auto;
+}
+
+.buff-filter-b .MuiOutlinedInput-root{
+  max-width: 800px !important;
+  overflow: hidden !important;
+}
+
+.base-table{
+  text-align: center;
+    margin-top: 14px;
+}
+
+.leaflet-draw{
+  margin-top: 15px !important;
+}
+
+.leaflet-draw-toolbar{
+  width: 116px;
+  padding: 5px;
+  text-align: center !important;
+}
+
+.sr-only{
+  display: contents !important;
+}
+
+.leaflet-draw-toolbar.leaflet-bar a {
+  margin-top: 0px;
+  width: 100% !important;
+  text-align: center !important;
+  margin: 0 auto;
+  display: block !important;
+}
+
+.leaflet-draw-toolbar.leaflet-bar a:hover{
+  background-color: rgba(201, 202, 249, 0.391) !important;
+}
+
+.leaflet-draw-actions{
   display: flex;
+  position: relative;
+  left: 0px !important;
+}
+
+.leaflet-interactive{
+  fill: none !important;
+  stroke: red;
+  stroke-width: 1px;
 }

@@ -15,6 +15,7 @@ app.use(async (ctx, next) => {
   const start = Date.now()
   await next() // This will pause this function until the endpoint handler has resolved
   const responseTime = Date.now() - start
+  console.log(start, responseTime, ctx.request.url)
 })
 
 // Error Handler - All uncaught exceptions will percolate up to here
