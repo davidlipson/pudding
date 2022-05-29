@@ -61,6 +61,15 @@
     margin-top: 0px;
 }
 
+.results-table{
+  margin-top: 20px;
+  padding: 0px;
+  display: inline-block;
+    overflow-y: scroll;
+    max-height: 500px;
+    background-color: white !important;
+}
+
 .empty-table{
     background: #f8f8f8;
     border-radius: 10px;
@@ -216,6 +225,22 @@ th{
     stroke: blue !important;
     stroke-width: 1px !important;
     fill: rgba(0,0,255,0.3) !important;
+}
+
+.Major-Arterial {
+  stroke: blue !important;
+  stroke-width: 1px !important;
+  fill: rgba(0,0,255,0.3) !important;
+}
+
+.Commercial-Residential{
+  stroke: green !important;
+  stroke-width: 1px !important;
+  fill: rgba(64, 210, 61, 0.3) !important; 
+}
+
+.first-gis:hover {
+  fill: blue !important;
 }
 
 .second-gis {
@@ -540,4 +565,31 @@ tr:hover{
   fill: none !important;
   stroke: red;
   stroke-width: 1px;
+}
+
+.leaflet-popup {
+    height: 100px !important;
+    width: 500px !important;
+}
+
+.tag-add{
+  display: flex !important;
+  width: 450px !important;
+}
+
+.tag-add input{
+  width: 400px;
+}
+
+
+.tooltip-header{
+  font-weight: 600;
+  font-size: x-large;
+}
+
+.table-header{
+  font-size: x-large;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 10px;
 }

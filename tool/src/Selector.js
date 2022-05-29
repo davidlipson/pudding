@@ -7,7 +7,7 @@ import { EditControl } from "react-leaflet-draw"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-class Boundary extends Component {
+class Selector extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -68,7 +68,7 @@ class Boundary extends Component {
     };
 
     render(){
-        return(
+        return(<div className="selector-group">
                         <EditControl
                           onEdited={this._onEdited}
                           onCreated={this._onCreated}
@@ -104,8 +104,9 @@ class Boundary extends Component {
                             marker: false
                           }}
                         />
+                </div>
         )
       }
     }
     
-    export default Boundary
+    export default Selector

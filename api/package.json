@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "publish": "cd ../ && git subtree push --prefix api pudding-api origin/v0.2 || true"
+    "publish": "cd ../ && git subtree push --prefix api heroku-pudding-backend origin/v0.2 || true"
   },
   "author": "",
   "license": "ISC",

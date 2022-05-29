@@ -75,6 +75,34 @@ router.get('/query', async ctx => {
 	}
 })
 
+router.get('/layers', async ctx => {
+	try{
+		const results = await database.getLayers()
+		const props = results.map(layer => {
+			let data = layer.data.map(row => {
+				let geom = JSON.parse(row.geom)
+				console.log(geom)
+				return {
+					geom: geom,
+					fields: row
+				}
+			})	
+			return {
+				colour: layer.colour,
+				data: data,
+				name: layer.name
+			}
+		})
+		console.log(props)
+		ctx.body = props
+	}
+	catch(e){
+		console.log(e)
+		console.log(ctx.query)
+		ctx.body = []
+	}
+})
+
 router.get('/find', async ctx => {
 	try{
 		const results = await database.findAddress(ctx.query.address, ctx.query.base)

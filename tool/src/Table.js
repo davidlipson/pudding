@@ -41,6 +41,8 @@ class PropTable extends Component {
   render(){
     const currentResults = this.getFilteredResults();
     return(
+      <>
+        <div className="table-header">{this.props.title}</div>
         <Table striped bordered hover>
                 <tbody>
                   <tr className="header-row">
@@ -61,6 +63,7 @@ class PropTable extends Component {
                   ))}
                 </tbody>
         </Table>
+      </>
     )
   }
 }

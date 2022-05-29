@@ -56,14 +56,15 @@ class FilterRow extends Component {
   }
 
   componentWillUpdate(nextProps, nextState){
-    if(this.state.table == "map-boundary" && !nextProps.boundary){
+    if(this.state.table == "map-boundary" && nextProps.boundary != this.props.boundary){
+      console.log('test')
       this.setState({table: nextProps.base_table, field: "", where: "", value: ""})
     }
 
     if(this.state.table == this.props.base_table && nextProps.base_table != this.state.table && nextState.table == this.state.table){
       this.setState({table: nextProps.base_table, field: "", where: "", value: ""})
     }
-    if(this.state.table != this.props.base_table && this.props.buffers != nextProps.buffers && !(this.state.table in nextProps.buffers)){
+    if(this.state.table != "map-boundary" && this.state.table != this.props.base_table && this.props.buffers != nextProps.buffers && !(this.state.table in nextProps.buffers)){
       this.setState({table: nextProps.base_table, field: "", where: "", value: ""})
     }
   }

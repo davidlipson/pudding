@@ -40,7 +40,8 @@ class App extends Component {
       query_id: this.props.query_id,
       saving_query: false,
       saving_layer: false,
-      boundary: null
+      boundary: null,
+      layers: []
     }
     this.updateFilter = this.updateFilter.bind(this)
     this.updateBuffers = this.updateBuffers.bind(this)
@@ -51,7 +52,8 @@ class App extends Component {
     this.getFields();
     this.getBufferFields();
     this.getOptions();
-    this.getBaseTables()
+    this.getBaseTables();
+    this.getLayers()
     if (this.props.query_id != null) this.runExistingQuery()
   }
 
@@ -70,6 +72,14 @@ class App extends Component {
     const currentFields = this.state.fields;
     currentFields.fields = data;
     this.setState({fields: currentFields})
+  }
+
+  getLayers = async () => {
+    const url = `http://localhost:5000/layers`;
+    const response = await fetch(url)
+    const data = await response.json()
+    console.log('data', data)
+    this.setState({layers: data, mapuuid: uuid()})
   }
 
   getBaseTables = async () => {
@@ -112,7 +122,7 @@ class App extends Component {
   }
  
   clearBuffers(){
-    this.setState({buffer_rules: {}, buffers: {}, mapuuid: uuid(), query_id: null})
+    this.setState({buffer_rules: {}, buffers: {}, /*mapuuid: uuid(),*/ query_id: null})
   }
 
   getUsedBuffers = () => {
@@ -166,6 +176,7 @@ class App extends Component {
         const url = `http://localhost:5000/create?base=${this.state.base_table}&name=${result.trim()}&filter=${encodeURIComponent(this.state.query)}&buffers=${encodeURIComponent(JSON.stringify(usedBuffers))}`;
         const response = await fetch(url)
         const data = await response.json()
+        if (data.status == 500) alert(data.message)
         this.setState({saving_layer: false})
         this.getBufferFields();
       }
@@ -185,7 +196,7 @@ class App extends Component {
   updateBuffer(table, data){
     let currentBuffers = this.state.buffers;
     currentBuffers[table] = data;
-    this.setState({buffers: currentBuffers, mapuuid: uuid(), query_id: null})
+    this.setState({buffers: currentBuffers, /*mapuuid: uuid(), */ query_id: null})
   }
 
   prevPage = async (e) => {
@@ -217,29 +228,40 @@ class App extends Component {
     this.setState({boundary: b})
   }
 
+  /*
+  <div className="pagination-nav">
+                <Pagination>
+                      <Pagination.Prev onClick={this.prevPage.bind(this)} disabled={this.state.page < 2}/>
+                      <Pagination.Next onClick={this.nextPage.bind(this)}/>
+                </Pagination>
+              </div>*/
+
   render(){
+    console.log(this.state.properties, this.state.address)
     return(
       <div className='app'>
-        {this.state.query}
         <Address findAddress={this.findAddress}/>
         <div className="top-side">
-          <Map notifyBoundary={this.notifyBoundary} addresses={this.state.addresses} centroid={this.state.centroid} mapuuid={this.state.mapuuid} zoom={this.state.zoom} properties={this.state.properties} buffers={this.state.buffers}/>
+          <Map layers={this.state.layers} notifyBoundary={this.notifyBoundary} addresses={this.state.addresses} centroid={this.state.centroid} mapuuid={this.state.mapuuid} zoom={this.state.zoom} properties={this.state.properties} buffers={this.state.buffers}/>
           <div className="left-side">
             <Buffer fields={this.state.fields.buffers} update={this.updateBuffers} clear={this.clearBuffers}/>
             <Filter boundary={this.state.boundary} notifyBaseTable={this.notifyBaseTable} tables={this.state.base_tables} options={this.state.options} fields={this.state.fields} update={this.updateFilter} buffers={this.state.buffers}/>
           </div>
         </div>
         <div className="bottom-side">
-        {(this.state.properties.length && !this.state.loading) ? 
+        {(this.state.properties.length && !this.state.loading) || (this.state.addresses.length) ?
+        <>
+            {(this.state.properties.length && !this.state.loading) ? 
             <div className="results-table">
-              <div className="pagination-nav">
-                <Pagination>
-                      <Pagination.Prev onClick={this.prevPage.bind(this)} disabled={this.state.page < 2}/>
-                      <Pagination.Next onClick={this.nextPage.bind(this)}/>
-                </Pagination>
-              </div>
-              <PropTable updateMapFocus={this.updateMapFocus} properties={this.state.properties}/>
-            </div> : 
+               <PropTable title="Properties" updateMapFocus={this.updateMapFocus} properties={this.state.properties}/> 
+            </div> : <></>}
+            {this.state.addresses.length ?
+            <div className="results-table">
+               <PropTable title="Addresses" updateMapFocus={this.updateMapFocus} properties={this.state.addresses}/>
+            </div>
+            : <></>}
+        </>
+        : 
             <div className="empty-table">
               {this.state.loading ? <Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner> : 
               <span>No results found yet.</span>}

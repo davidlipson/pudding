@@ -93,8 +93,21 @@ module.exports = {
 
 		return results
 	},
+	getLayers: async () => {
+		const major_query = `select gid, linear_name_full as description, ST_AsGeoJSON(ST_Buffer(geom,0.000000001)) as geom from centreline c where feature_code = 201200`
+		const major_results = await client.query(major_query)
+		const minor_query = `select gid, linear_name_full as description, ST_AsGeoJSON(ST_Buffer(geom,0.000000001)) as geom from centreline c where feature_code = 201300`
+		const minor_results = await client.query(minor_query)
+		const comm_res_query = `select zid as gid, zn_zone as description, ST_AsGeoJSON(geom) as geom from zone_category zc where zn_zone in ('CR', 'CRE')`
+		const comm_res_results = await client.query(comm_res_query)
+		return [
+			{name: "Major Arterial", data: major_results.rows, colour: "red"},
+			{name: "Minor Arterial", data: minor_results.rows, colour: "blue"},
+			{name: "Commercial Residential", data: comm_res_results.rows, colour: "green"}
+		]
+	},
 	queryProperties: async (base, filter, buffers) => {
-		const query = `${generatePropertyQuery(base, filter, buffers)} limit ${limit}`
+		const query = `${generatePropertyQuery(base, filter, buffers)}`
 		console.log(query)
 		const results = await client.query(query)
 		return results.rows
@@ -112,7 +125,7 @@ module.exports = {
 		}
 	},
 	saveAndShare: async (base, filter, buffers) => {
-		const query = `${generatePropertyQuery(base, filter, buffers)} limit ${limit}`
+		const query = `${generatePropertyQuery(base, filter, buffers)}`
 		console.log(query)
 		const outer_query = `insert into past_queries (query) values ('${query.replace(/'/g,"''")}') returning id`
 		console.log(outer_query)
@@ -124,7 +137,7 @@ module.exports = {
 			let query = generateNewTablePropertyQuery(base, filter, buffers)
 			const outer_query = `create table ${name} as (${query})`
 			console.log(outer_query)
-			client.query(outer_query)
+			return client.query(outer_query)
 				.then(results => {
 					query = `CREATE INDEX ${name}_geom_idx ON ${name} USING GIST (geom)`;
 					console.log(query)
@@ -139,16 +152,17 @@ module.exports = {
 								return true
 							})
 						})*/
+						return {status: 200, message: "Success"}
 					})
 				})
 				.catch(err => {
 					console.log(err)
-					return false
+					return {status: 500, message: err.message}
 				})
 		}
-		catch(e){
-			console.log(e)
-			return false
+		catch(err){
+			console.log(err)
+			return {status: 500, message: err.message}
 		}
 		
 	},
